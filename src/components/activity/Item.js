@@ -5,8 +5,10 @@ import { FlowText } from "../overrides/Text";
 import { FlowHighlightView } from "../overrides/HighlightView";
 import { FlowRow } from "../overrides/Row";
 import { COLORS } from "../../variables/styles";
+import { LoadingDots } from "../overrides/LoadingDots";
 
-export const ActivityItem = ({ title }) => {
+
+export const ActivityItem = ({ title, isActive }) => {
   const pan = useRef(new Animated.ValueXY()).current;
 
   const panResponder = useRef(
@@ -37,7 +39,11 @@ export const ActivityItem = ({ title }) => {
       <FlowHighlightView style={styles.itemContainer}>
         <FlowRow style={styles.row}>
           <FlowText>{title}</FlowText>
-          <FlowText style={styles.time}>00:00:00</FlowText>
+          {isActive ? (
+            <LoadingDots />
+          ) : (
+            <FlowText style={styles.time}>00:00:00</FlowText>
+          )}
         </FlowRow>
       </FlowHighlightView>
     </Animated.View>
